@@ -93,8 +93,8 @@ data:
         set: train
         reg: true
         per_image_tokens: false
-        repeats: 10
-        
+        repeats: 5
+
     validation:
       target: ldm.data.personalized.PersonalizedBase
       params:
@@ -106,7 +106,7 @@ data:
 lightning:
   modelcheckpoint:
     params:
-      every_n_train_steps: 500
+      every_n_train_steps: 600
   callbacks:
     image_logger:
       target: main.ImageLogger
@@ -117,4 +117,4 @@ lightning:
 
   trainer:
     benchmark: True
-    max_steps: 800
+    max_steps: 500
