@@ -72,6 +72,8 @@ model:
 
     cond_stage_config:
       target: ldm.modules.encoders.modules.FrozenCLIPEmbedder
+      params:
+        pretrained_model_name_or_path: F:/Clip-Vit-Large-Patch14
 
 data:
   target: main.DataModuleFromConfig

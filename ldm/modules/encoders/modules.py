@@ -164,11 +164,11 @@ class SpatialRescaler(nn.Module):
 class FrozenCLIPEmbedder(AbstractEncoder):
     """Uses the CLIP transformer encoder for text (from Hugging Face)"""
 
-    def __init__(self, version="openai/clip-vit-large-patch14", device="cuda", max_length=77):
+    def __init__(self, version="openai/clip-vit-large-patch14", device="cuda", max_length=77,pretrained_model_name_or_path=None):
         super().__init__()
-        self.tokenizer = CLIPTokenizer.from_pretrained(pretrained_model_name_or_path="/hy-tmp/Clip-Vit-Large-Patch14")
+        self.tokenizer = CLIPTokenizer.from_pretrained(pretrained_model_name_or_path=pretrained_model_name_or_path)
         self.transformer = CLIPModel.from_pretrained(
-            pretrained_model_name_or_path="/hy-tmp/Clip-Vit-Large-Patch14")
+            pretrained_model_name_or_path=pretrained_model_name_or_path)
         self.device = device
         self.max_length = max_length
 

@@ -1,4 +1,5 @@
 import argparse, os, sys, datetime, glob, importlib, csv
+os.environ['CUBLAS_WORKSPACE_CONFIG']=':16:8'
 import numpy as np
 import time
 import torch
@@ -598,6 +599,7 @@ if __name__ == "__main__":
     ckptdir = os.path.join(logdir, "checkpoints")
     cfgdir = os.path.join(logdir, "configs")
     seed_everything(opt.seed)
+    torch.use_deterministic_algorithms(True)
 
     try:
         # init and save configs
@@ -629,7 +631,7 @@ if __name__ == "__main__":
 
         # if opt.init_word:
         #     config.model.params.personalization_config.params.initializer_words[0] = opt.init_word
-            
+        #修改yaml中的dataset的class_word
         config.data.params.train.params.placeholder_token = opt.class_word
         config.data.params.reg.params.placeholder_token = opt.class_word
         config.data.params.validation.params.placeholder_token = opt.class_word
@@ -819,10 +821,10 @@ if __name__ == "__main__":
                 pudb.set_trace()
 
 
-        import signal
-
-        signal.signal(signal.SIGUSR1, melk)
-        signal.signal(signal.SIGUSR2, divein)
+        # import signal
+        #
+        # signal.signal(signal.SIGUSR1, melk)
+        # signal.signal(signal.SIGUSR2, divein)
 
         # run
         if opt.train:
